@@ -1,3 +1,6 @@
+# Note, we intentionally don't use
+#   set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY_EXE};)
+# here, which would replace the build of any target by a clang-tidy run.
 cmake_minimum_required(VERSION 3.24)
 
 project(clangtidy)
