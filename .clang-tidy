@@ -26,7 +26,7 @@ Checks: >
   -google-readability-avoid-underscore-in-googletest-name,
   -google-readability-braces-around-statements,
   -hicpp-braces-around-statements,readability-braces-around-statements,
-  -hicpp-deprecated-headers
+  -hicpp-deprecated-headers,
   -hicpp-explicit-conversions,
   -hicpp-named-parameter,
   -hicpp-special-member-functions,
@@ -37,7 +37,7 @@ Checks: >
   -llvmlibc-restrict-system-libc-headers,
   -llvm-header-guard,
   -misc-non-private-member-variables-in-classes,
-  -modernize-deprecated-headers
+  -modernize-deprecated-headers,
   -modernize-use-trailing-return-type,
   -readability-braces-around-statements,
   -readability-identifier-length,
@@ -60,6 +60,7 @@ CheckOptions:
   - { key: readability-identifier-naming.MethodCase,                      value: lower_case }
   - { key: readability-identifier-naming.NamespaceCase,                   value: lower_case }
   - { key: readability-identifier-naming.ParameterCase,                   value: lower_case }
+  - { key: readability-identifier-naming.PrivateMemberCase,               value: lower_case }
   - { key: readability-identifier-naming.PrivateMemberSuffix,             value: _ }
   - { key: readability-identifier-naming.StructCase,                      value: CamelCase }
   - { key: readability-identifier-naming.TypeAliasCase,                   value: CamelCase }
