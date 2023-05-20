@@ -38,7 +38,7 @@ Additionally, you have to include the following lines in your project's
 When building the target every file from list of subdirs (recursively) will
 be tidied.
 ```
-set(cxx_dirs "apps;include;libs;sdks;source;src;test")
+set(cxx_dirs "apps;include;libs;source;src;test")
 
 add_clang_tidy_project_target("${cxx_dirs}")
 ```
