@@ -7,8 +7,15 @@ project(clangtidy)
 
 set(MB_CLANGTIDY_VER 15 CACHE STRING
     "clang-tidy-? version to be used preferably, compatible with default .clang-tidy file")
+set(MB_CLANGTIDY_CUSTOM_EXE "" CACHE STRING
+        "override clang-tidy exe by custom path")
 
-find_program(CLANGTIDY_EXE NAMES clang-tidy-${MB_CLANGTIDY_VER} clang-tidy)
+if (MB_CLANGTIDY_CUSTOM_EXE STREQUAL "")
+    find_program(CLANGTIDY_EXE NAMES clang-tidy-${MB_CLANGTIDY_VER} clang-tidy)
+else()
+    find_program(CLANGTIDY_EXE NAMES ${MB_CLANGTIDY_CUSTOM_EXE})
+endif()
+
 message("CLANGTIDY_EXE: ${CLANGTIDY_EXE}")
 
 macro(glob_recurse_append_cxx_sources cxx_sources dir)
