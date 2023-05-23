@@ -31,7 +31,7 @@ macro(add_clang_tidy_project_target cxx_dirs)
         add_custom_target(
             clang-tidy-${PROJECT_NAME}
             COMMAND ${RUN_CLANG_TIDY_EXE} -fix
-            -p ${CMAKE_BINARY_DIR}/compile_commands.json
+            -p ${CMAKE_BINARY_DIR}
             ${all_cxx_sources}
         )
         unset(all_cxx_sources)
