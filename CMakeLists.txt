@@ -6,17 +6,11 @@ cmake_minimum_required(VERSION 3.24)
 project(clangtidy)
 
 set(MB_CLANGTIDY_VER 15 CACHE STRING
-    "clang-tidy-? version to be used preferably, compatible with default .clang-tidy file")
-set(MB_CLANGTIDY_CUSTOM_EXE "" CACHE STRING
-        "override clang-tidy exe by custom path")
+    "run-clang-tidy-? version to be used preferably, compatible with default .clang-tidy file")
 
-if (MB_CLANGTIDY_CUSTOM_EXE STREQUAL "")
-    find_program(CLANGTIDY_EXE NAMES clang-tidy-${MB_CLANGTIDY_VER} clang-tidy)
-else()
-    find_program(CLANGTIDY_EXE NAMES ${MB_CLANGTIDY_CUSTOM_EXE})
-endif()
+find_program(RUN_CLANG_TIDY_EXE NAMES run-clang-tidy-${MB_CLANGTIDY_VER} run-clang-tidy)
 
-message("CLANGTIDY_EXE: ${CLANGTIDY_EXE}")
+message("RUN_CLANG_TIDY_EXE: ${RUN_CLANG_TIDY_EXE}")
 
 macro(glob_recurse_append_cxx_sources cxx_sources dir)
     file(GLOB_RECURSE
@@ -28,7 +22,7 @@ endmacro()
 
 # See README.md on usage.
 macro(add_clang_tidy_project_target cxx_dirs)
-    if (CLANGTIDY_EXE)
+    if (RUN_CLANG_TIDY_EXE)
         unset(all_cxx_sources)
         foreach (cxx_dir ${cxx_dirs})
             glob_recurse_append_cxx_sources(all_cxx_sources ${cxx_dir})
@@ -36,7 +30,7 @@ macro(add_clang_tidy_project_target cxx_dirs)
 
         add_custom_target(
             clang-tidy-${PROJECT_NAME}
-            COMMAND ${CLANGTIDY_EXE} --fix --fix-errors
+            COMMAND ${RUN_CLANG_TIDY_EXE} -fix
             -p ${CMAKE_BINARY_DIR}/compile_commands.json
             ${all_cxx_sources}
         )
