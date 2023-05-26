@@ -46,6 +46,7 @@ Checks: >
   readability-identifier-naming,
   -readability-implicit-bool-conversion,
   -readability-function-cognitive-complexity,
+  -readability-named-parameter,
   -readability-uppercase-literal-suffix
 
 WarningsAsErrors: "*"
