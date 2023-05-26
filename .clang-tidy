@@ -16,6 +16,7 @@ Checks: >
   -cppcoreguidelines-macro-usage,
   -cppcoreguidelines-non-private-member-variables-in-classes,
   -cppcoreguidelines-owning-memory,
+  -cppcoreguidelines-pro-type-member-init,
   -cppcoreguidelines-pro-type-reinterpret-cast,
   -cppcoreguidelines-special-member-functions,
   -fuchsia-default-arguments-calls,
@@ -54,10 +55,13 @@ CheckOptions:
   - { key: readability-identifier-naming.EnumCase,                        value: CamelCase }
   - { key: readability-identifier-naming.EnumConstantCase,                value: lower_case }
   - { key: readability-identifier-naming.FunctionCase,                    value: lower_case }
+  - { key: readability-identifier-naming.FunctionIgnoredRegexp,           value: '([_A-Z0-9]+|BM_.*)' }
   - { key: readability-identifier-naming.LocalVariableCase,               value: lower_case }
+  - { key: readability-identifier-naming.LocalVariableIgnoredRegexp,      value: '(_.*|.*_)' }
   - { key: readability-identifier-naming.MacroDefinitionCase,             value: UPPER_CASE }
   - { key: readability-identifier-naming.MemberCase,                      value: lower_case }
   - { key: readability-identifier-naming.MethodCase,                      value: lower_case }
+  - { key: readability-identifier-naming.MethodIgnoredRegexp,             value: '([_A-Z0-9]+|SetUp|TearDown|do_.*)' }
   - { key: readability-identifier-naming.NamespaceCase,                   value: lower_case }
   - { key: readability-identifier-naming.ParameterCase,                   value: lower_case }
   - { key: readability-identifier-naming.PrivateMemberCase,               value: lower_case }
@@ -72,6 +76,9 @@ CheckOptions:
   - { key: readability-identifier-naming.ValueTemplateParameterCase,      value: lower_case }
   - { key: readability-identifier-naming.VariableCase,                    value: lower_case }
 
-HeaderFilterRegex: '^.*(?:_deps).*'
-# dangerous as this looks into 3rd party headers as well, but you might get better results (just use it occasionally)
-#HeaderFilterRegex: '.*'
+# Dangerous but needed, over exhaustive, changes also all your included third-party files in build folders.
+# Solution (partial perhaps) shown below but not yet usable, unfortunately. So after the run you need to revert or
+# delete third-party files.
+HeaderFilterRegex: '.*'
+# negative look ahead not yet supported
+#HeaderFilterRegex: "^.*(?:_deps).*"
