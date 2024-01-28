@@ -8,6 +8,14 @@ project(clangtidy)
 set(MB_CLANGTIDY_VER 15 CACHE STRING
     "run-clang-tidy-? version to be used preferably, compatible with default .clang-tidy file")
 
+# by experience this is still very experimental, breaks code; but just give it a try from time to time
+option(MB_CLANGTIDY_FIX "automatically apply fixes" OFF)
+
+set(fix_option)
+if (MB_CLANGTIDY_FIX)
+    set(fix_option "-fix")
+endif ()
+
 find_program(RUN_CLANG_TIDY_EXE NAMES run-clang-tidy-${MB_CLANGTIDY_VER} run-clang-tidy)
 
 message("RUN_CLANG_TIDY_EXE: ${RUN_CLANG_TIDY_EXE}")
@@ -30,7 +38,7 @@ macro(add_clang_tidy_project_target cxx_dirs)
 
         add_custom_target(
             clang-tidy-${PROJECT_NAME}
-            COMMAND ${RUN_CLANG_TIDY_EXE} -fix
+            COMMAND ${RUN_CLANG_TIDY_EXE} ${fix_option}
             -p ${CMAKE_BINARY_DIR}
             ${all_cxx_sources}
         )
