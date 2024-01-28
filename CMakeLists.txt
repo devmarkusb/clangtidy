@@ -19,6 +19,7 @@ endif ()
 find_program(RUN_CLANG_TIDY_EXE NAMES run-clang-tidy-${MB_CLANGTIDY_VER} run-clang-tidy)
 
 message("RUN_CLANG_TIDY_EXE: ${RUN_CLANG_TIDY_EXE}")
+message("clang tidy fix option: ${fix_option}")
 
 macro(glob_recurse_append_cxx_sources cxx_sources dir)
     file(GLOB_RECURSE
