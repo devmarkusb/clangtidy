@@ -3,7 +3,8 @@ Provides support for creating a CMake target per project that applies clang-tidy
 
 ## Requirements
 
-Preferred clang-tidy version: see MB_CLANGTIDY_VER in CMakeLists.txt.
+Preferred clang-tidy version: see MB_CLANGTIDY_VER in CMakeLists.txt,
+which you can configure to be a higher version also of course.
 Although plain clang-tidy is used if the preferred version is not
 available.
 
