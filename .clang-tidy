@@ -17,6 +17,7 @@ Checks: >
   -clang-diagnostic-c++17-extensions,
   -clang-diagnostic-error,
   -clang-diagnostic-unused-macros,
+  -cppcoreguidelines-avoid-do-while,
   -cppcoreguidelines-macro-usage,
   -cppcoreguidelines-non-private-member-variables-in-classes,
   -cppcoreguidelines-owning-memory,
