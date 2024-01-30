@@ -11,21 +11,16 @@ set(MB_CLANGTIDY_VER 15 CACHE STRING
 # by experience this is still very experimental, breaks code; but just give it a try from time to time
 option(MB_CLANGTIDY_FIX "automatically apply fixes" OFF)
 
-set(fix_option)
-if (MB_CLANGTIDY_FIX)
-    set(fix_option "-fix")
-endif ()
-
 find_program(RUN_CLANG_TIDY_EXE NAMES run-clang-tidy-${MB_CLANGTIDY_VER} run-clang-tidy)
 
 message("RUN_CLANG_TIDY_EXE: ${RUN_CLANG_TIDY_EXE}")
-message("clang tidy fix option: ${fix_option}")
+message("clang tidy fix option: ${MB_CLANGTIDY_FIX}")
 
 macro(glob_recurse_append_cxx_sources cxx_sources dir)
     file(GLOB_RECURSE
-            s
-            ${dir}/*.[chi]pp ${dir}/*.[chi] ${dir}/*.cu
-            )
+        s
+        ${dir}/*.[chi]pp ${dir}/*.[chi] ${dir}/*.cu
+    )
     list(APPEND ${cxx_sources} ${s})
 endmacro()
 
@@ -37,6 +32,10 @@ macro(add_clang_tidy_project_target cxx_dirs)
             glob_recurse_append_cxx_sources(all_cxx_sources ${cxx_dir})
         endforeach ()
 
+        set(fix_option)
+        if (MB_CLANGTIDY_FIX)
+            set(fix_option "-fix")
+        endif ()
         add_custom_target(
             clang-tidy-${PROJECT_NAME}
             COMMAND ${RUN_CLANG_TIDY_EXE} ${fix_option}
