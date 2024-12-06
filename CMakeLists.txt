@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.24)
 
 project(clangtidy)
 
-set(MB_CLANGTIDY_VER 15 CACHE STRING
+set(MB_CLANGTIDY_VER 18 CACHE STRING
     "run-clang-tidy-? version to be used; default is the preferred choice, compatible with default .clang-tidy file")
 
 # by experience this is still very experimental, breaks code; but just give it a try from time to time
